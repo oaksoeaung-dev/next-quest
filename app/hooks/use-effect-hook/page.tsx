@@ -18,9 +18,7 @@ export default function Page() {
     */
 
   const [trips, setTrips] = useState<TripType[]>([]);
-  const [url, setUrl] = useState(
-    "https://67665e96410f849996577919.mockapi.io/trips"
-  );
+  const [url, setUrl] = useState("https://67665e96410f849996577919.mockapi.io/trips");
 
   useEffect(() => {
     fetch(url)
@@ -31,28 +29,17 @@ export default function Page() {
   }, [url]);
 
   const filterByLocation = (location: string) => {
-    setUrl(
-      `https://67665e96410f849996577919.mockapi.io/trips?location=${location}`
-    );
+    setUrl(`https://67665e96410f849996577919.mockapi.io/trips?location=${location}`);
   };
 
   return (
     <TripList>
       <div className={"col-span-4 flex justify-end gap-5"}>
         <Button onClick={() => filterByLocation("")}>Remove Filter</Button>
-        <Button onClick={() => filterByLocation("Buckinghamshire")}>
-          Filter by Buckinghamshire
-        </Button>
+        <Button onClick={() => filterByLocation("Buckinghamshire")}>Filter by Buckinghamshire</Button>
       </div>
       {trips.map((trip) => {
-        return (
-          <Trip
-            key={trip.id}
-            name={trip.name}
-            price={trip.price}
-            location={trip.location}
-          />
-        );
+        return <Trip key={trip.id} name={trip.name} price={trip.price} location={trip.location} />;
       })}
     </TripList>
   );
