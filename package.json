@@ -7,7 +7,8 @@
     "json-server": "npx json-server -w ./data/db.json -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier .\\app\\ --write"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.2",

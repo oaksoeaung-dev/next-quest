@@ -23,7 +23,14 @@ export default function Page() {
     <div>
       <h1 className={"my-5 text-center text-3xl font-semibold text-zinc-700"}>User List</h1>
       <div className={"my-5"}>
-        <input type={"text"} onChange={(e) => setSearch(e.target.value)} className={"w-full rounded-lg border border-zinc-400 p-2 text-zinc-700 focus:border-zinc-700 focus:outline-none"} placeholder={"Search"} />
+        <input
+          type={"text"}
+          onChange={(e) => setSearch(e.target.value)}
+          className={
+            "w-full rounded-lg border border-zinc-400 p-2 text-zinc-700 focus:border-zinc-700 focus:outline-none"
+          }
+          placeholder={"Search"}
+        />
       </div>
       <table className={"w-full text-sm"}>
         <thead className={"text-xs"}>
@@ -38,7 +45,12 @@ export default function Page() {
         <tbody>
           {users
             .filter((user) => {
-              return search.toLowerCase() === "" ? user : user.name.toLowerCase().includes(search.toLowerCase()) || user.email.toLowerCase().includes(search.toLowerCase()) || user.address.toLowerCase().includes(search.toLowerCase()) || user.phone.toLowerCase().includes(search.toLowerCase());
+              return search.toLowerCase() === ""
+                ? user
+                : user.name.toLowerCase().includes(search.toLowerCase()) ||
+                    user.email.toLowerCase().includes(search.toLowerCase()) ||
+                    user.address.toLowerCase().includes(search.toLowerCase()) ||
+                    user.phone.toLowerCase().includes(search.toLowerCase());
             })
             .map((user, index) => (
               <tr key={user.id}>
