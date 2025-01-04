@@ -1,7 +1,7 @@
-import Gallery from "@/app/firstcomponent/_components/Gallery";
-import Card from "@/app/firstcomponent/_components/Card";
+import Gallery from "@/app/first-component/_components/Gallery";
+import Card from "@/app/first-component/_components/Card";
 import { H2 } from "@/components/H2";
-import PackagingList from "@/app/firstcomponent/_components/PackagingList";
+import PackagingList from "@/app/first-component/_components/PackagingList";
 
 export default function FirstComponentPage() {
   return (

@@ -55,8 +55,8 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={currentUrl === "/firstcomponent"}>
-                  <a href={"/firstcomponent"}>
+                <SidebarMenuButton asChild isActive={currentUrl === "/first-component"}>
+                  <a href={"/first-component"}>
                     <HandHelping/>
                     <span>First Component</span>
                   </a>

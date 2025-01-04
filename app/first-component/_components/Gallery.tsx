@@ -1,5 +1,5 @@
-import Profile from "@/app/firstcomponent/_components/Profile";
-import Avatar from "@/app/firstcomponent/_components/Avatar";
+import Profile from "@/app/first-component/_components/Profile";
+import Avatar from "@/app/first-component/_components/Avatar";
 
 export default function Gallery() {
   return (

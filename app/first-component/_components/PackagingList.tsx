@@ -1,4 +1,4 @@
-import Item from "@/app/firstcomponent/_components/Item";
+import Item from "@/app/first-component/_components/Item";
 
 export default function PackagingList() {
   return (
