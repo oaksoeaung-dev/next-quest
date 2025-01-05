@@ -1,6 +1,4 @@
-"use client"
-import {Calendar, ChevronDown, HandHelping, Milestone, Search, SearchIcon, Settings, Webhook} from "lucide-react"
-
+"use client";
 import {
   Sidebar,
   SidebarContent,
@@ -9,42 +7,20 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
-import {usePathname} from "next/navigation";
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+} from "@/components/ui/sidebar";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { usePathname } from "next/navigation";
+import {routes} from "@/lib/route";
+import Link from "next/link";
+import {ChevronDown} from "lucide-react";
 
-// Menu items.
-const hooks = [
-  {
-    title: "useState",
-    url: "/hooks/use-state-hook",
-    icon: Milestone,
-  },
-  {
-    title: "useEffect",
-    url: "/hooks/use-effect-hook",
-    icon: Milestone,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-]
 
 export function AppSidebar() {
   const currentUrl: string = usePathname();
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -53,59 +29,59 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={currentUrl === "/first-component"}>
-                  <a href={"/first-component"}>
-                    <HandHelping/>
-                    <span>First Component</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-            <SidebarMenu>
-              <Collapsible className="group/collapsible">
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton asChild>
-                      <a href="#">
-                        <Webhook/>
-                        <span>Hooks</span>
-                        <ChevronDown
-                          className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"/>
-                      </a>
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      {hooks.map((hook) => (
-                        <SidebarMenuSubItem key={hook.title}>
-                          <SidebarMenuButton asChild>
-                            <a href={hook.url}>
-                              <hook.icon/>
-                              <span>{hook.title}</span>
-                            </a>
-                          </SidebarMenuButton>
-                        </SidebarMenuSubItem>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            </SidebarMenu>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href={"/search"}>
-                    <SearchIcon/>
-                    <span>Search</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
+            {
+              routes.map(route => {
+                if(route.childUrl != undefined) {
+                  return(
+                    <SidebarMenu key={route.title}>
+                      <Collapsible>
+                        <SidebarMenuItem>
+                          <CollapsibleTrigger asChild>
+                            <SidebarMenuButton asChild>
+                              <Link href={route.url}>
+                                <route.icon />
+                                <span>{route.title}</span>
+                                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                              </Link>
+                            </SidebarMenuButton>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent>
+                            <SidebarMenuSub>
+                              {route.childUrl.map((child) => (
+                                <SidebarMenuSubItem key={child.title}>
+                                  <SidebarMenuButton asChild isActive={currentUrl === child.url}>
+                                    <Link href={child.url}>
+                                      <child.icon />
+                                      <span>{child.title}</span>
+                                    </Link>
+                                  </SidebarMenuButton>
+                                </SidebarMenuSubItem>
+                              ))}
+                            </SidebarMenuSub>
+                          </CollapsibleContent>
+                        </SidebarMenuItem>
+                      </Collapsible>
+                    </SidebarMenu>
+                  )
+                }else{
+                  return(
+                    <SidebarMenu key={route.title}>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton asChild isActive={currentUrl === route.url}>
+                          <a href={route.url}>
+                            <route.icon />
+                            <span>{route.title}</span>
+                          </a>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    </SidebarMenu>
+                  )
+                }
+              })
+            }
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

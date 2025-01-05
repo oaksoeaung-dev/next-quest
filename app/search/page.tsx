@@ -10,7 +10,7 @@ type User = {
   phone: string;
 };
 
-export default function Page() {
+export default function SearchPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
 
